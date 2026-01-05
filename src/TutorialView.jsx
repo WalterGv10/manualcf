@@ -209,6 +209,7 @@ const TutorialView = () => {
                                 icon={step.icon}
                                 image={step.image}
                                 compact={true}
+                                variant={data.showScanner ? 'ia' : 'default'}
                                 delay={index * 0.05}
                             />
                         </motion.div>
