@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Rocket, Cpu, ShieldCheck, ArrowRight } from 'lucide-react';
-import MatrixBackground from './components/MatrixBackground';
+import PixelBlast from './components/PixelBlast';
 import LoginInfoPortal from './components/LoginInfoPortal';
 
 const Welcome = () => {
@@ -15,8 +15,28 @@ const Welcome = () => {
     };
 
     return (
-        <div className="min-h-screen pt-20 md:pt-32 px-4 md:px-6 flex flex-col items-center justify-center text-center overflow-hidden">
-            <MatrixBackground />
+        <div className="min-h-screen pt-20 md:pt-32 px-4 md:px-6 flex flex-col items-center justify-center text-center overflow-hidden relative">
+            <div className="absolute inset-0 z-0">
+                <PixelBlast
+                    variant="circle"
+                    pixelSize={6}
+                    color="#B19EEF"
+                    patternScale={3}
+                    patternDensity={1.2}
+                    pixelSizeJitter={0.5}
+                    enableRipples={true}
+                    rippleSpeed={0.4}
+                    rippleThickness={0.12}
+                    rippleIntensityScale={1.5}
+                    liquid={true}
+                    liquidStrength={0.12}
+                    liquidRadius={1.2}
+                    liquidWobbleSpeed={5}
+                    speed={0.6}
+                    edgeFade={0.25}
+                    transparent={true}
+                />
+            </div>
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
