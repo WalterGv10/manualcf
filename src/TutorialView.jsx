@@ -43,6 +43,7 @@ const content = {
     escaneo: {
         title: "Escaneo SAT",
         description: "Digitalización de facturas legales en tiempo real con OCR.",
+        showScanner: true,
         steps: [
             {
                 title: "Captura con IA",
@@ -142,28 +143,60 @@ const TutorialView = () => {
                 </p>
             </div>
 
-            {/* Interactive Layout for Paso 1 */}
-            <div className={`flex flex-col ${data.heroImage ? 'lg:flex-row' : ''} gap-6 items-start justify-center`}>
+            {/* Interactive Layout for Paso 1 & Escaneo */}
+            <div className={`flex flex-col ${data.heroImage || data.showScanner ? 'lg:flex-row' : ''} gap-6 items-start justify-center`}>
 
-                {/* Single Hero Image */}
-                {data.heroImage && (
+                {/* Single Hero Image or Scanner */}
+                {(data.heroImage || data.showScanner) && (
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="w-full lg:w-1/2 max-w-md mx-auto aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 shadow-2xl relative group sticky lg:top-32"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="w-full lg:w-1/2 max-w-md mx-auto aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 shadow-2xl relative group sticky lg:top-32 bg-dark-base/40"
                     >
-                        <img src={data.heroImage} alt="Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                        <div className="absolute bottom-4 left-4 right-4 p-4 glass-morphism rounded-xl border-white/10">
-                            <p className="text-[10px] font-orbitron text-neon-pink uppercase mb-1">Entorno Real</p>
-                            <p className="text-[9px] text-white/50 leading-none">Censura aplicada para protección de datos personales.</p>
-                        </div>
-                        <div className="scan-line !bg-neon-pink !opacity-40" />
+                        {data.heroImage ? (
+                            <>
+                                <img src={data.heroImage} alt="Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                <div className="absolute bottom-4 left-4 right-4 p-4 glass-morphism rounded-xl border-white/10">
+                                    <p className="text-[10px] font-orbitron text-neon-pink uppercase mb-1">Entorno Real</p>
+                                    <p className="text-[9px] text-white/50 leading-none">Censura aplicada para protección de datos personales.</p>
+                                </div>
+                                <div className="scan-line !bg-neon-pink !opacity-40" />
+                            </>
+                        ) : data.showScanner ? (
+                            <div className="w-full h-full flex flex-col items-center justify-center relative p-8">
+                                <div className="w-full h-full border-2 border-neon-cyan/20 border-dashed rounded-xl flex items-center justify-center flex-col gap-4 bg-neon-cyan/5 relative overflow-hidden">
+                                    <motion.div
+                                        animate={{
+                                            scale: [1, 1.05, 1],
+                                            opacity: [0.3, 0.6, 0.3]
+                                        }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                    >
+                                        <Camera size={64} className="text-neon-cyan" />
+                                    </motion.div>
+                                    <div className="text-center z-10">
+                                        <p className="font-orbitron text-neon-cyan text-xs uppercase tracking-widest mb-1">Modo OCR Activo</p>
+                                        <p className="text-[9px] text-white/40 uppercase">Esperando Captura de Pantalla...</p>
+                                    </div>
+
+                                    {/* Laser Scanner Effect */}
+                                    <div className="laser-line" />
+
+                                    {/* Holographic grid */}
+                                    <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--neon-cyan) 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }} />
+                                </div>
+                                <div className="absolute top-4 left-4 flex gap-1">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                                    <span className="text-[8px] font-orbitron text-red-500">REC</span>
+                                </div>
+                            </div>
+                        ) : null}
                     </motion.div>
                 )}
 
                 {/* Steps Grid */}
-                <div className={`w-full ${data.heroImage ? 'lg:w-1/2' : ''} grid grid-cols-1 gap-3`}>
+                <div className={`w-full ${(data.heroImage || data.showScanner) ? 'lg:w-1/2' : ''} grid grid-cols-1 gap-3`}>
                     {data.steps.map((step, index) => (
                         <motion.div
                             key={index}
