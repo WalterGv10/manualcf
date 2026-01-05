@@ -8,7 +8,7 @@ const Navbar = () => {
         { name: 'Inicio', path: '/', icon: LayoutDashboard },
         { name: 'Paso 1', path: '/tutorial/perfil', icon: ShieldCheck, specialized: true },
         { name: 'SAT', path: '/tutorial/escaneo', icon: Camera },
-        { name: 'Munis', path: '/tutorial/municipales', icon: MapPin },
+        { name: 'Recibos', path: '/tutorial/municipales', icon: MapPin },
         { name: 'Rpt', path: '/tutorial/reportes', icon: FileText },
     ];
 

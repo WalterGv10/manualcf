@@ -10,6 +10,7 @@ import StepCard from './components/StepCard';
 
 // Capturas de pantalla
 import perfilImg from './assets/perfil_config.png';
+import recibosImg from './assets/recibos_municipales.png';
 
 const content = {
     perfil: {
@@ -89,18 +90,25 @@ const content = {
         ]
     },
     municipales: {
-        title: "Tickets Munis",
-        description: "Respaldo para peajes (Iztapa) y parqueos.",
+        title: "Recibos Municipales",
+        description: "Gestión especializada para gastos no-electrónicos (Peajes y Parqueos).",
+        heroImage: recibosImg,
+        isMuni: true,
         steps: [
             {
                 title: "Foto Obligatoria",
-                description: "Única evidencia legal para tickets no-electrónicos.",
+                description: "Única evidencia legal para tickets no-reimprimibles.",
                 icon: Image
             },
             {
-                title: "Rutas y Peajes",
-                description: "Registra Municipalidad y Punto de Servicio.",
+                title: "Entidad Municipal",
+                description: "Registra la ubicación (ej. Iztapa) y el Punto de Servicio.",
                 icon: MapPin
+            },
+            {
+                title: "Clasificación Gasto",
+                description: "Divide entre Peaje o Parqueo para un reporte ordenado.",
+                icon: ClipboardList
             }
         ]
     }
@@ -135,7 +143,11 @@ const TutorialView = () => {
                     )}
                 </AnimatePresence>
 
-                <h2 className={`text-2xl md:text-5xl font-black mb-2 uppercase tracking-tighter ${data.isPrimary ? 'text-neon-pink' : 'text-neon-cyan'}`}>
+                <h2 className={`text-2xl md:text-5xl font-black mb-2 uppercase tracking-tighter 
+                    ${data.isPrimary ? 'text-neon-pink' : ''}
+                    ${data.isMuni ? 'text-neon-orange text-shadow-orange' : ''}
+                    ${!data.isPrimary && !data.isMuni ? 'text-neon-cyan' : ''}
+                `}>
                     {data.title}
                 </h2>
                 <p className="text-white/30 text-xs md:text-lg max-w-lg mx-auto leading-tight italic">
@@ -143,7 +155,7 @@ const TutorialView = () => {
                 </p>
             </div>
 
-            {/* Interactive Layout for Paso 1 & Escaneo */}
+            {/* Interactive Layout */}
             <div className={`flex flex-col ${data.heroImage || data.showScanner ? 'lg:flex-row' : ''} gap-6 items-start justify-center`}>
 
                 {/* Single Hero Image or Scanner */}
@@ -151,17 +163,21 @@ const TutorialView = () => {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="w-full lg:w-1/2 max-w-md mx-auto aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 shadow-2xl relative group sticky lg:top-32 bg-dark-base/40"
+                        className={`w-full lg:w-1/2 max-w-md mx-auto aspect-[4/3] rounded-2xl overflow-hidden border border-white/5 shadow-2xl relative group sticky lg:top-32 bg-dark-base/40
+                            ${data.isMuni ? 'border-neon-orange/20 shadow-neon-orange/10' : ''}
+                        `}
                     >
                         {data.heroImage ? (
                             <>
                                 <img src={data.heroImage} alt="Preview" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                                 <div className="absolute bottom-4 left-4 right-4 p-4 glass-morphism rounded-xl border-white/10">
-                                    <p className="text-[10px] font-orbitron text-neon-pink uppercase mb-1">Entorno Real</p>
-                                    <p className="text-[9px] text-white/50 leading-none">Censura aplicada para protección de datos personales.</p>
+                                    <p className={`text-[10px] font-orbitron uppercase mb-1 ${data.isMuni ? 'text-neon-orange' : 'text-neon-pink'}`}>Entorno Real</p>
+                                    <p className="text-[9px] text-white/50 leading-none">Vista móvil optimizada para técnicos en campo.</p>
                                 </div>
-                                <div className="scan-line !bg-neon-pink !opacity-40" />
+                                <div className={`scan-line !opacity-40 
+                                    ${data.isMuni ? '!bg-neon-orange !shadow-neon-orange' : '!bg-neon-pink'}
+                                `} />
                             </>
                         ) : data.showScanner ? (
                             <div className="w-full h-full flex flex-col items-center justify-center relative p-8">
@@ -209,7 +225,7 @@ const TutorialView = () => {
                                 icon={step.icon}
                                 image={step.image}
                                 compact={true}
-                                variant={data.showScanner ? 'ia' : 'default'}
+                                variant={data.showScanner ? 'ia' : (data.isMuni ? 'muni' : 'default')}
                                 delay={index * 0.05}
                             />
                         </motion.div>
@@ -218,7 +234,12 @@ const TutorialView = () => {
             </div>
 
             {/* Dynamic Backgrounds */}
-            <div className={`fixed top-1/2 left-1/4 w-64 h-64 ${data.isPrimary ? 'bg-neon-pink/10' : 'bg-neon-cyan/5'} blur-[100px] rounded-full -z-10 animate-pulse`} />
+            <div className={`fixed top-1/2 left-1/4 w-64 h-64 
+                ${data.isPrimary ? 'bg-neon-pink/10' : ''} 
+                ${data.isMuni ? 'bg-neon-orange/10' : ''}
+                ${!data.isPrimary && !data.isMuni ? 'bg-neon-cyan/5' : ''}
+                blur-[100px] rounded-full -z-10 animate-pulse
+            `} />
         </motion.div>
     );
 };
