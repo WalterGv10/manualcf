@@ -15,6 +15,9 @@ import perfilImg from './assets/perfil_config.png';
 import recibosImg from './assets/recibos_municipales.png';
 import escaneoImg from './assets/escaneo_sat.png';
 import deteccionImg from './assets/deteccion_ia.png';
+import moduReportesImg from './assets/modu_reportes.png';
+import vistaReporteImg from './assets/vista_reporte.png';
+import pdfFinalImg from './assets/pdf_final.png';
 
 const content = {
     perfil: {
@@ -76,22 +79,24 @@ const content = {
     },
     reportes: {
         title: "Reportes PDF",
-        description: "Documentos 'llave en mano' listos para contabilidad.",
+        description: "Visualización de estados, cierres y documentos 'llave en mano'.",
         steps: [
             {
+                title: "Reporte Mensual",
+                description: "Cierre de caja y totales del mes con detalle de gastos preciso.",
+                icon: FileText,
+                image: vistaReporteImg
+            },
+            {
                 title: "PDF Automatizado",
-                description: "Incluye firmas y datos del Paso 1 automáticamente.",
-                icon: FileDown
+                description: "Generación instantánea del documento oficial con firmas y Vo.Bo. integrados.",
+                icon: FileDown,
+                image: pdfFinalImg
             },
             {
-                title: "Dashboard Anual",
-                description: "Métricas de gasto acumulado y promedios.",
+                title: "Reporte Anual",
+                description: "Comparativa histórica de consumos para análisis de presupuesto y proyecciones.",
                 icon: PieChart
-            },
-            {
-                title: "Gráficas Mensuales",
-                description: "Desglose por monto y cantidad de documentos.",
-                icon: FileText
             }
         ]
     },
@@ -219,20 +224,6 @@ const TutorialView = () => {
                                     </div>
                                 )}
 
-                                <div className="absolute bottom-6 left-6 right-6 p-4 glass-morphism rounded-xl border-white/10 z-30 transform transition-transform group-hover:translate-y-[-5px]">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <div className={`w-1.5 h-1.5 rounded-full animate-pulse
-                                            ${data.isMuni ? 'bg-neon-orange shadow-[0_0_8px_var(--neon-orange)]' : ''}
-                                            ${data.isPrimary ? 'bg-neon-orange shadow-[0_0_8px_var(--neon-orange)]' : 'bg-neon-cyan shadow-[0_0_8px_var(--neon-cyan)]'}
-                                        `} />
-                                        <p className={`text-[10px] font-orbitron uppercase tracking-widest
-                                            ${data.isMuni ? 'text-neon-orange' : ''}
-                                            ${data.isPrimary ? 'text-neon-orange' : ''}
-                                            ${!data.isMuni && !data.isPrimary ? 'text-neon-cyan' : ''}
-                                        `}>Motor de Reconocimiento</p>
-                                    </div>
-                                    <p className="text-[10px] text-white/60 leading-tight">Visualización en tiempo real del procesamiento de datos fiscales.</p>
-                                </div>
 
                                 <div className={`scan-line !opacity-20 
                                     ${data.isMuni ? '!bg-neon-orange !shadow-neon-orange' : ''}
