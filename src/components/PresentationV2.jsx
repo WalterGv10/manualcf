@@ -34,22 +34,41 @@ const PresentationV2 = () => {
                 </div>
             </section>
 
-            {/* SLIDE 3: GESTIÓN CRUD */}
+            {/* SLIDE 3: GESTIÓN TOTAL */}
             <section>
                 <div className="content-wrapper">
                     <div className="text-box">
                         <h2>Gestión Total</h2>
-                        <p>Tu contabilidad personal, flexible y corregible.</p>
-                        <br />
-                        <ul className="feature-list">
-                            <li><i className="fas fa-eye"></i> <strong>Visualizar:</strong> Historial completo en tiempo real.</li>
-                            <li><i className="fas fa-edit"></i> <strong>Editar:</strong> Corrige montos o descripciones antes del corte.</li>
-                            <li><i className="fas fa-trash-alt"></i> <strong>Borrar:</strong> Elimina registros duplicados fácilmente.</li>
-                        </ul>
-                    </div>
-                    <div className="visual-box">
-                        <div className="card-glass" style={{ textAlign: 'center' }}>
-                            <i className="fas fa-mobile-alt icon-large" style={{ color: 'var(--neon-turq)' }}></i>
+                        <p className="subtitle">Tu contabilidad personal, flexible y corregible.</p>
+
+                        <div className="management-grid">
+                            <div className="manage-item">
+                                <div className="manage-icon">
+                                    <i className="fas fa-eye"></i>
+                                </div>
+                                <div className="manage-text">
+                                    <strong>Visualizar</strong>
+                                    <span>Historial completo en tiempo real.</span>
+                                </div>
+                            </div>
+                            <div className="manage-item">
+                                <div className="manage-icon">
+                                    <i className="fas fa-edit"></i>
+                                </div>
+                                <div className="manage-text">
+                                    <strong>Editar</strong>
+                                    <span>Corrige montos o descripciones pronto.</span>
+                                </div>
+                            </div>
+                            <div className="manage-item">
+                                <div className="manage-icon">
+                                    <i className="fas fa-trash-alt"></i>
+                                </div>
+                                <div className="manage-text">
+                                    <strong>Borrar</strong>
+                                    <span>Elimina registros duplicados fácil.</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,11 +138,11 @@ const PresentationV2 = () => {
                         </ul>
                     </div>
                     <div className="visual-box">
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', textAlign: 'center' }}>
-                            <div><i className="fab fa-react icon-large" style={{ color: '#61DAFB', fontSize: '5rem' }}></i><br /><span style={{ color: '#888' }}>Frontend</span></div>
-                            <div><i className="fas fa-database icon-large" style={{ color: '#336791', fontSize: '5rem' }}></i><br /><span style={{ color: '#888' }}>Backend</span></div>
-                            <div><i className="fas fa-robot icon-large" style={{ color: 'var(--neon-turq)', fontSize: '5rem' }}></i><br /><span style={{ color: '#888' }}>AI</span></div>
-                            <div><i className="fas fa-shield-alt icon-large" style={{ color: 'white', fontSize: '5rem' }}></i><br /><span style={{ color: '#888' }}>Auth</span></div>
+                        <div className="tech-grid">
+                            <div className="tech-card"><i className="fab fa-react" style={{ color: '#61DAFB' }}></i><span>Frontend</span></div>
+                            <div className="tech-card"><i className="fas fa-database" style={{ color: '#336791' }}></i><span>Backend</span></div>
+                            <div className="tech-card"><i className="fas fa-robot" style={{ color: 'var(--neon-turq)' }}></i><span>IA</span></div>
+                            <div className="tech-card"><i className="fas fa-shield-alt" style={{ color: 'white' }}></i><span>Auth</span></div>
                         </div>
                     </div>
                 </div>

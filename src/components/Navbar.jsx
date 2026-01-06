@@ -30,18 +30,22 @@ const Navbar = () => {
                             key={item.path}
                             to={item.path}
                             className={({ isActive }) => `
-                flex items-center gap-1 md:gap-2 text-[9px] md:text-sm font-medium transition-all duration-300 relative py-1 px-1 md:px-0
-                ${isActive ? 'text-neon-cyan' : 'text-white/40 hover:text-white'}
-                ${item.specialized ? 'text-neon-pink' : ''}
-              `}
+                                flex items-center gap-1 md:gap-2 text-[9px] md:text-sm font-medium transition-all duration-300 relative py-1 px-1 md:px-0
+                                ${isActive ? 'text-neon-cyan' : 'text-white/40 hover:text-white'}
+                                ${item.specialized ? 'text-neon-pink' : ''}
+                            `}
                         >
-                            <item.icon size={14} className="md:w-[18px] md:h-[18px]" />
-                            <span className={`${item.specialized ? 'inline' : 'hidden lg:inline'}`}>{item.name}</span>
-                            {({ isActive }) => isActive && (
-                                <motion.div
-                                    layoutId="nav-underline"
-                                    className="absolute -bottom-1 left-0 w-full h-0.5 bg-neon-cyan rounded-full"
-                                />
+                            {({ isActive }) => (
+                                <>
+                                    <item.icon size={14} className="md:w-[18px] md:h-[18px]" />
+                                    <span className={`${item.specialized ? 'inline' : 'hidden lg:inline'}`}>{item.name}</span>
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav-underline"
+                                            className="absolute -bottom-1 left-0 w-full h-0.5 bg-neon-cyan rounded-full"
+                                        />
+                                    )}
+                                </>
                             )}
                         </NavLink>
                     ))}

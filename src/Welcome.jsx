@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Rocket, Cpu, ShieldCheck, ArrowRight } from 'lucide-react';
 import PixelBlast from './components/PixelBlast';
@@ -78,12 +78,6 @@ const Welcome = () => {
                 animate="visible"
                 className="max-w-xl md:max-w-4xl w-full relative z-10 flex flex-col items-center"
             >
-                <motion.span
-                    variants={itemVariants}
-                    className="px-3 py-1 rounded-full border border-neon-pink/30 bg-neon-pink/5 text-neon-pink text-[9px] md:text-xs font-orbitron uppercase tracking-widest mb-4 inline-block animate-pulse"
-                >
-                    ⚠️ Requisito Inicial Obligatorio
-                </motion.span>
 
                 <motion.h1
                     variants={itemVariants}
@@ -97,7 +91,7 @@ const Welcome = () => {
                     className="text-sm md:text-2xl text-white/70 mb-8 md:mb-12 max-w-md md:max-w-2xl mx-auto leading-relaxed font-light"
                 >
                     Para reportes óptimos, el
-                    <span className="text-neon-pink font-bold drop-shadow-[0_0_8px_rgba(255,0,127,0.5)]"> PASO 1 </span>
+                    <span className="text-neon-orange font-bold drop-shadow-[0_0_12px_rgba(255,145,0,0.8)] px-1"> PASO 1 </span>
                     es configurar tus firmas.
                 </motion.p>
 
@@ -108,9 +102,9 @@ const Welcome = () => {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 w-full max-w-xs sm:max-w-none">
                         <Link to="/tutorial/perfil" className="w-full sm:w-auto">
                             <motion.button
-                                whileHover={{ scale: 1.05, boxShadow: "0 0 25px rgba(255,0,127,0.5)" }}
+                                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,145,0,0.6)" }}
                                 whileTap={{ scale: 0.95 }}
-                                className="w-full bg-neon-pink text-white px-6 md:px-10 py-4 md:py-6 rounded-xl font-orbitron font-bold text-sm md:text-lg uppercase flex items-center justify-center gap-2 border border-neon-pink/50 shadow-[0_0_15px_rgba(255,0,127,0.3)] transition-all duration-300 relative overflow-hidden group"
+                                className="w-full bg-neon-orange text-black px-6 md:px-10 py-4 md:py-6 rounded-xl font-orbitron font-bold text-sm md:text-lg uppercase flex items-center justify-center gap-2 border border-neon-orange/50 shadow-[0_0_20px_rgba(255,145,0,0.4)] transition-all duration-300 relative overflow-hidden group"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
                                     1. Firmas
@@ -149,11 +143,15 @@ const Welcome = () => {
                 </motion.div>
             </motion.div>
 
-            <LoginInfoPortal
-                isOpen={portalOpen}
-                onClose={() => setPortalOpen(false)}
-                view={portalView}
-            />
+            <AnimatePresence>
+                {portalOpen && (
+                    <LoginInfoPortal
+                        isOpen={portalOpen}
+                        onClose={() => setPortalOpen(false)}
+                        view={portalView}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 };
