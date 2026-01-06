@@ -8,6 +8,13 @@ import LoginInfoPortal from './components/LoginInfoPortal';
 const Welcome = () => {
     const [portalOpen, setPortalOpen] = useState(false);
     const [portalView, setPortalView] = useState('presentation');
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const openPortal = (view) => {
         setPortalView(view);
@@ -19,10 +26,10 @@ const Welcome = () => {
             <div className="absolute inset-0 z-0">
                 <PixelBlast
                     variant="circle"
-                    pixelSize={6}
+                    pixelSize={isMobile ? 8 : 6}
                     color="#B19EEF"
-                    patternScale={3}
-                    patternDensity={1.2}
+                    patternScale={isMobile ? 4.5 : 3}
+                    patternDensity={isMobile ? 2.5 : 1.2}
                     pixelSizeJitter={0.5}
                     enableRipples={true}
                     rippleSpeed={0.4}
