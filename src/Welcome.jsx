@@ -8,10 +8,11 @@ import LoginInfoPortal from './components/LoginInfoPortal';
 const Welcome = () => {
     const [portalOpen, setPortalOpen] = useState(false);
     const [portalView, setPortalView] = useState('presentation');
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize(); // Check immediately
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -35,7 +36,7 @@ const Welcome = () => {
                     rippleSpeed={0.4}
                     rippleThickness={0.12}
                     rippleIntensityScale={1.5}
-                    liquid={true}
+                    liquid={false} // Disabled for stability check
                     liquidStrength={0.12}
                     liquidRadius={1.2}
                     liquidWobbleSpeed={5}
