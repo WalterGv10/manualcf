@@ -42,7 +42,7 @@ const Welcome = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
-                className="max-w-xl md:max-w-4xl w-full"
+                className="max-w-xl md:max-w-4xl w-full relative z-10"
             >
                 <span className="px-3 py-1 rounded-full border border-neon-pink/30 bg-neon-pink/5 text-neon-pink text-[9px] md:text-xs font-orbitron uppercase tracking-widest mb-4 inline-block animate-pulse">
                     ⚠️ Requisito Inicial Obligatorio
