@@ -46,10 +46,10 @@ const Welcome = () => {
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <PixelBlast
                     variant="circle"
-                    pixelSize={isMobile ? 6 : 5}
+                    pixelSize={isMobile ? 10 : 5}
                     color="#B19EEF"
-                    patternScale={isMobile ? 4 : 3.5}
-                    patternDensity={isMobile ? 1.1 : 1.2}
+                    patternScale={isMobile ? 2.5 : 3.5}
+                    patternDensity={isMobile ? 1.5 : 1.2}
                     pixelSizeJitter={0.5}
                     enableRipples={!isMobile}
                     rippleSpeed={0.5}
@@ -60,7 +60,7 @@ const Welcome = () => {
                     liquidStrength={0.15}
                     liquidRadius={1.2}
                     liquidWobbleSpeed={5}
-                    speed={isMobile ? 1.4 : 0.6}
+                    speed={isMobile ? 3.5 : 0.6}
                     edgeFade={0.2}
                     transparent={true}
                     autoPauseOffscreen={true}
