@@ -387,17 +387,37 @@ const PixelBlast = ({
             scene.add(quad);
             const clock = new THREE.Clock();
             const setSize = () => {
-                const w = container.clientWidth || 1;
-                const h = container.clientHeight || 1;
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                if (w === 0 || h === 0) return;
                 renderer.setSize(w, h, false);
                 uniforms.uResolution.value.set(renderer.domElement.width, renderer.domElement.height);
                 if (threeRef.current?.composer)
                     threeRef.current.composer.setSize(renderer.domElement.width, renderer.domElement.height);
                 uniforms.uPixelSize.value = pixelSize * renderer.getPixelRatio();
             };
+
+            // Initial size check - wait for layout
+            if (container.clientWidth === 0 || container.clientHeight === 0) {
+                const ro = new ResizeObserver(() => {
+                    if (container.clientWidth > 0 && container.clientHeight > 0) {
+                        // Re-trigger effect by forcing a re-render or just letting the next cleanup/init cycle handle it
+                        // but since we are inside useEffect, we can't easily restart it.
+                        // Instead, we will defer the init.
+                    }
+                });
+                ro.observe(container);
+                // effectively abort this run, the resize observer will trigger a parent re-render if state changed, 
+                // but here we might just want to return and rely on the fact that if size is 0, we shouldn't init.
+                // However, simpler is just to proceed but NOT render until size is > 0.
+            }
+
+            // ... (proceed with init but safeguard setSize)
+
             setSize();
             const ro = new ResizeObserver(setSize);
             ro.observe(container);
+
             const randomFloat = () => {
                 if (typeof window !== 'undefined' && window.crypto?.getRandomValues) {
                     const u32 = new Uint32Array(1);
@@ -478,10 +498,18 @@ const PixelBlast = ({
             });
             let raf = 0;
             const animate = () => {
-                if (autoPauseOffscreen && !visibilityRef.current.visible) {
+                // FORCE RENDER DO NOT PAUSE
+                // if (autoPauseOffscreen && !visibilityRef.current.visible) {
+                //   raf = requestAnimationFrame(animate);
+                //   return;
+                //}
+
+                // Safe check for 0 dimensions to avoid warnings
+                if (renderer.domElement.width === 0 || renderer.domElement.height === 0) {
                     raf = requestAnimationFrame(animate);
                     return;
                 }
+
                 uniforms.uTime.value = timeOffset + clock.getElapsedTime() * speedRef.current;
                 if (liquidEffect) liquidEffect.uniforms.get('uTime').value = uniforms.uTime.value;
                 if (composer) {
