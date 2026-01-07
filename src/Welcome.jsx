@@ -129,7 +129,15 @@ const Welcome = () => {
                         </Link>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 border-t border-white/10 pt-6 md:pt-8 w-full max-w-md mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 border-t border-white/10 pt-6 md:pt-8 w-full max-w-lg mx-auto">
+                        <a
+                            href="https://controlfac.netlify.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-neon-cyan/30 bg-neon-cyan/5 text-neon-cyan font-orbitron text-[10px] md:text-xs uppercase tracking-wider hover:bg-neon-cyan/15 hover:shadow-[0_0_15px_rgba(0,243,255,0.2)] transition-all duration-300"
+                        >
+                            <Rocket size={14} /> Ir a la App
+                        </a>
                         <button
                             onClick={() => openPortal('presentation')}
                             className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#00ff41]/30 bg-[#00ff41]/5 text-[#00ff41] font-orbitron text-[10px] md:text-xs uppercase tracking-wider hover:bg-[#00ff41]/15 hover:shadow-[0_0_10px_rgba(0,255,65,0.2)] transition-all duration-300"

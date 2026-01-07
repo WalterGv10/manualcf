@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Camera, FileText, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Camera, FileText, MapPin, ShieldCheck, Sparkles, Rocket } from 'lucide-react';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -123,6 +123,28 @@ const Navbar = () => {
                             )}
                         </NavLink>
                     ))}
+
+                    <div className="h-4 w-px bg-white/10 mx-1 hidden md:block" />
+
+                    <a
+                        href="https://controlfac.netlify.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-1.5 px-3 py-1.5 md:px-5 md:py-2.5 rounded-lg md:rounded-xl font-orbitron font-black text-[9px] md:text-xs uppercase tracking-wider transition-all duration-300 border
+                            ${scrolled
+                                ? 'bg-neon-cyan/10 border-neon-cyan/30 text-neon-cyan hover:bg-neon-cyan/20 shadow-[0_0_15px_rgba(0,243,255,0.1)]'
+                                : 'bg-[#00ff41]/5 border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 shadow-[0_0_15px_rgba(0,255,65,0.1)]'
+                            }
+                        `}
+                    >
+                        <span className="hidden sm:inline">Ir a la</span> App
+                        <motion.div
+                            animate={{ x: [0, 2, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            <Rocket size={scrolled ? 12 : 16} />
+                        </motion.div>
+                    </a>
                 </div>
             </div>
         </nav>
