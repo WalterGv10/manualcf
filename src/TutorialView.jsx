@@ -5,7 +5,7 @@ import {
     Camera, User, FileText, Scan, FileCode, CheckCircle,
     PenTool, CreditCard, PieChart, FileDown, ShieldCheck,
     MapPin, Image, Edit3, ClipboardList, AlertTriangle, Fingerprint,
-    ArrowLeft, ArrowRight, ChevronRight
+    ArrowLeft, ArrowRight, ChevronRight, Info
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StepCard from './components/StepCard';
@@ -97,6 +97,11 @@ const content = {
                 title: "Reporte Anual",
                 description: "Comparativa histórica de consumos para análisis de presupuesto y proyecciones.",
                 icon: PieChart
+            },
+            {
+                title: "💡 Siempre Útil",
+                description: "Si tu coordinador prefiere el método tradicional (anotar datos atrás de facturas), ¡no hay problema! La app igual te sirve como respaldo personal: mantén control de tus gastos y ten claridad de cuánto te deben acreditar. Tu tranquilidad financiera, garantizada.",
+                icon: Info
             }
         ]
     },
@@ -208,11 +213,15 @@ const TutorialView = () => {
 
                                 {data.showScanner && (
                                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                                        {/* Laser Scanner Effect Overlay */}
-                                        <div className="laser-line !bg-neon-cyan !shadow-[0_0_25px_rgba(0,251,255,0.8)] z-20" />
+                                        {/* Primary Laser Scanner Effect */}
+                                        <div className="laser-line !bg-neon-cyan !shadow-[0_0_40px_rgba(0,251,255,1)] z-20" />
+
+                                        {/* Secondary Laser Scanner (delayed) for double-sweep effect */}
+                                        <div className="laser-line !bg-neon-cyan !shadow-[0_0_30px_rgba(0,251,255,0.7)] z-[19]"
+                                            style={{ animationDelay: '1.5s', opacity: 0.6 }} />
 
                                         {/* Digital overlay grid */}
-                                        <div className="absolute inset-0 opacity-[0.07]"
+                                        <div className="absolute inset-0 opacity-[0.1]"
                                             style={{ backgroundImage: 'radial-gradient(var(--neon-cyan) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
                                         />
 
