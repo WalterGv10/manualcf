@@ -143,7 +143,7 @@ const TutorialView = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen pt-16 md:pt-24 pb-10 px-4 md:px-6 max-w-7xl mx-auto"
+            className="min-h-screen pt-16 md:pt-24 pb-32 px-4 md:px-6 max-w-7xl mx-auto"
         >
             {/* Header */}
             <div className="mb-6 text-center">

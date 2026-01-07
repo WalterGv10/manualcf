@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Camera, FileText, MapPin, ShieldCheck, Sparkles, Rocket } from 'lucide-react';
+import { Home, Camera, FileText, MapPin, ShieldCheck, Sparkles, Rocket } from 'lucide-react';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
     }, []);
 
     const navItems = [
-        { name: 'Inicio', path: '/', icon: LayoutDashboard },
+        { name: 'Inicio', path: '/', icon: Home },
         { name: 'Paso 1', path: '/tutorial/perfil', icon: ShieldCheck, priority: true },
         { name: 'SAT', path: '/tutorial/escaneo', icon: Camera },
         { name: 'Recibos', path: '/tutorial/municipales', icon: MapPin },
@@ -60,7 +60,7 @@ const Navbar = () => {
                         <h1 className={`font-black tracking-tighter uppercase font-orbitron transition-all duration-500 leading-none
                             ${scrolled ? 'text-[10px] md:text-lg' : 'text-xs md:text-2xl'}
                         `}>
-                            Control<span className="text-neon-cyan drop-shadow-[0_0_10px_#00f3ff]">FAC</span>
+                            Manual de <span className="text-neon-cyan drop-shadow-[0_0_10px_#00f3ff]">Uso</span>
                         </h1>
                         {!scrolled && (
                             <motion.span
@@ -123,28 +123,6 @@ const Navbar = () => {
                             )}
                         </NavLink>
                     ))}
-
-                    <div className="h-4 w-px bg-white/10 mx-1 hidden md:block" />
-
-                    <a
-                        href="https://controlfac.netlify.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center gap-1.5 px-3 py-1.5 md:px-5 md:py-2.5 rounded-lg md:rounded-xl font-orbitron font-black text-[9px] md:text-xs uppercase tracking-wider transition-all duration-300 border
-                            ${scrolled
-                                ? 'bg-neon-cyan/10 border-neon-cyan/30 text-neon-cyan hover:bg-neon-cyan/20 shadow-[0_0_15px_rgba(0,243,255,0.1)]'
-                                : 'bg-[#00ff41]/5 border-[#00ff41]/30 text-[#00ff41] hover:bg-[#00ff41]/10 shadow-[0_0_15px_rgba(0,255,65,0.1)]'
-                            }
-                        `}
-                    >
-                        <span className="hidden sm:inline">Ir a la</span> App
-                        <motion.div
-                            animate={{ x: [0, 2, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                            <Rocket size={scrolled ? 12 : 16} />
-                        </motion.div>
-                    </a>
                 </div>
             </div>
         </nav>

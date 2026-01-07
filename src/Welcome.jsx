@@ -42,14 +42,14 @@ const Welcome = () => {
     };
 
     return (
-        <div className="min-h-screen pt-16 md:pt-32 px-4 md:px-6 flex flex-col items-center justify-center text-center overflow-hidden relative">
+        <div className="min-h-screen pt-16 md:pt-32 pb-20 px-4 md:px-6 flex flex-col items-center justify-center text-center overflow-hidden relative">
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <PixelBlast
                     variant="circle"
-                    pixelSize={isMobile ? 8 : 5}
+                    pixelSize={isMobile ? 6 : 5}
                     color="#B19EEF"
                     patternScale={isMobile ? 4 : 3.5}
-                    patternDensity={isMobile ? 0.8 : 1.2}
+                    patternDensity={isMobile ? 1.1 : 1.2}
                     pixelSizeJitter={0.5}
                     enableRipples={!isMobile}
                     rippleSpeed={0.5}
@@ -60,7 +60,7 @@ const Welcome = () => {
                     liquidStrength={0.15}
                     liquidRadius={1.2}
                     liquidWobbleSpeed={5}
-                    speed={isMobile ? 0.2 : 0.6}
+                    speed={isMobile ? 1.4 : 0.6}
                     edgeFade={0.2}
                     transparent={true}
                     autoPauseOffscreen={true}
