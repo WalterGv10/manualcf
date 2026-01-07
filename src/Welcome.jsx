@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 import { Rocket, Cpu, ShieldCheck, ArrowRight } from 'lucide-react';
 import PixelBlast from './components/PixelBlast';
 import LoginInfoPortal from './components/LoginInfoPortal';
-import useMobile from './hooks/useMobile';
 
 const Welcome = () => {
     const [portalOpen, setPortalOpen] = useState(false);
     const [portalView, setPortalView] = useState('presentation');
-    const isMobile = useMobile();
 
     const openPortal = (view) => {
         setPortalView(view);
@@ -46,25 +44,19 @@ const Welcome = () => {
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <PixelBlast
                     variant="circle"
-                    pixelSize={isMobile ? 10 : 5}
+                    pixelSize={8}
                     color="#B19EEF"
-                    patternScale={isMobile ? 2.5 : 3.5}
-                    patternDensity={isMobile ? 1.5 : 1.2}
+                    patternScale={3}
+                    patternDensity={1.2}
                     pixelSizeJitter={0.5}
-                    enableRipples={!isMobile}
-                    rippleSpeed={0.5}
-                    rippleThickness={0.1}
-                    rippleIntensityScale={1.8}
-                    liquid={!isMobile}
-                    antialias={!isMobile}
-                    liquidStrength={0.15}
-                    liquidRadius={1.2}
-                    liquidWobbleSpeed={5}
-                    speed={isMobile ? 3.5 : 0.6}
+                    enableRipples={false}
+                    speed={1.5}
                     edgeFade={0.2}
                     transparent={true}
-                    autoPauseOffscreen={true}
-                    maxPixelRatio={isMobile ? 1 : 2}
+                    autoPauseOffscreen={false}
+                    maxPixelRatio={1}
+                    liquid={false}
+                    antialias={false}
                 />
             </div>
 
