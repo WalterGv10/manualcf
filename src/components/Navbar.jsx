@@ -17,7 +17,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto flex items-center justify-between glass-morphism px-3 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl border-white/5 shadow-2xl">
                 <div className="flex items-center gap-2 md:gap-3">
                     <div className="w-8 h-8 md:w-11 md:h-11 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(0,243,255,0.4)] overflow-hidden border border-neon-cyan/20">
-                        <img src="/favicon.png" alt="ControlFAC Logo" className="w-full h-full object-cover" />
+                        <img src="/logo.png" alt="ControlFAC Logo" className="w-full h-full object-contain" />
                     </div>
                     <div className="hidden sm:block">
                         <h1 className="text-sm md:text-xl font-black tracking-tighter uppercase font-orbitron">Control<span className="text-neon-cyan">FAC</span></h1>
