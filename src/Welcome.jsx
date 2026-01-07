@@ -88,6 +88,13 @@ const Welcome = () => {
 
                 <motion.p
                     variants={itemVariants}
+                    className="text-[10px] md:text-sm text-neon-cyan font-orbitron uppercase tracking-[0.4em] mb-4 md:mb-8 opacity-80"
+                >
+                    Gestión Fiscal y Respaldo Digital de Gastos de Parqueo
+                </motion.p>
+
+                <motion.p
+                    variants={itemVariants}
                     className="text-sm md:text-2xl text-white/70 mb-8 md:mb-12 max-w-md md:max-w-2xl mx-auto leading-relaxed font-light"
                 >
                     Para reportes óptimos, el
