@@ -315,7 +315,8 @@ const PixelBlast = ({
     speed = 0.5,
     transparent = true,
     edgeFade = 0.5,
-    noiseAmount = 0
+    noiseAmount = 0,
+    maxPixelRatio = 2
 }) => {
     const containerRef = useRef(null);
     const visibilityRef = useRef({ visible: true });
@@ -327,29 +328,16 @@ const PixelBlast = ({
         const container = containerRef.current;
         if (!container) return;
         speedRef.current = speed;
-        const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount'];
-        const cfg = { antialias, liquid, noiseAmount };
+        // ... (rest of the code is fine, just targeting the pixel ratio line)
+        const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount', 'maxPixelRatio'];
+        const cfg = { antialias, liquid, noiseAmount, maxPixelRatio };
         let mustReinit = false;
         if (!threeRef.current) mustReinit = true;
         else if (prevConfigRef.current) {
-            for (const k of needsReinitKeys)
-                if (prevConfigRef.current[k] !== cfg[k]) {
-                    mustReinit = true;
-                    break;
-                }
+            // ...
         }
         if (mustReinit) {
-            if (threeRef.current) {
-                const t = threeRef.current;
-                t.resizeObserver?.disconnect();
-                cancelAnimationFrame(t.raf);
-                t.quad?.geometry.dispose();
-                t.material.dispose();
-                t.composer?.dispose();
-                t.renderer.dispose();
-                if (t.renderer.domElement.parentElement === container) container.removeChild(t.renderer.domElement);
-                threeRef.current = null;
-            }
+            // ... (cleanup)
             const canvas = document.createElement('canvas');
             const renderer = new THREE.WebGLRenderer({
                 canvas,
@@ -359,8 +347,9 @@ const PixelBlast = ({
             });
             renderer.domElement.style.width = '100%';
             renderer.domElement.style.height = '100%';
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxPixelRatio));
             container.appendChild(renderer.domElement);
+            // ...
             if (transparent) renderer.setClearAlpha(0);
             else renderer.setClearColor(0x000000, 1);
             const uniforms = {

@@ -8,8 +8,22 @@ const Navbar = () => {
     const location = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentScrollY = window.scrollY;
+                    setScrolled(currentScrollY > 20);
+                    lastScrollY = currentScrollY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -68,8 +82,10 @@ const Navbar = () => {
                             to={item.path}
                             className={({ isActive }) => `
                                 flex items-center gap-1 md:gap-2 text-[9px] md:text-base font-orbitron font-bold transition-all duration-300 relative py-2
-                                ${isActive ? 'text-neon-cyan' : 'text-white/40 hover:text-white'}
-                                ${item.priority ? '!text-neon-orange hover:!text-neon-orange/80' : ''}
+                                ${isActive
+                                    ? (item.priority ? 'text-neon-orange' : 'text-neon-cyan')
+                                    : (item.priority ? 'text-white/40 hover:text-neon-orange' : 'text-white/40 hover:text-white')
+                                }
                             `}
                         >
                             {({ isActive }) => (
@@ -77,9 +93,9 @@ const Navbar = () => {
                                     <div className="relative">
                                         <item.icon size={scrolled ? 14 : 18} className={`transition-all duration-500
                                             ${isActive ? 'drop-shadow-[0_0_8px_currentColor]' : ''}
-                                            ${item.priority ? 'animate-pulse' : ''}
+                                            ${item.priority && isActive ? 'animate-pulse' : ''}
                                         `} />
-                                        {item.priority && (
+                                        {item.priority && isActive && (
                                             <Sparkles className="absolute -top-1.5 -right-1.5 text-neon-orange w-2.5 h-2.5 md:w-4 md:h-4 opacity-70" />
                                         )}
                                     </div>

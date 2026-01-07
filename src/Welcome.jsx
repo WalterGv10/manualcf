@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Rocket, Cpu, ShieldCheck, ArrowRight } from 'lucide-react';
 import PixelBlast from './components/PixelBlast';
 import LoginInfoPortal from './components/LoginInfoPortal';
+import useMobile from './hooks/useMobile';
 
 const Welcome = () => {
     const [portalOpen, setPortalOpen] = useState(false);
     const [portalView, setPortalView] = useState('presentation');
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const isMobile = useMobile();
 
     const openPortal = (view) => {
         setPortalView(view);
         setPortalOpen(true);
     };
 
-    // Animation Variants
+    // Animation Variants - Simplified for performance
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.3
+                staggerChildren: 0.1,
+                delayChildren: 0.2
             }
         }
     };
 
     const itemVariants = {
-        hidden: { y: 30, opacity: 0, scale: 0.95 },
+        hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,
             opacity: 1,
-            scale: 1,
             transition: {
                 type: 'spring',
-                stiffness: 100,
+                stiffness: 80,
                 damping: 15
             }
         }
@@ -49,26 +43,28 @@ const Welcome = () => {
 
     return (
         <div className="min-h-screen pt-16 md:pt-32 px-4 md:px-6 flex flex-col items-center justify-center text-center overflow-hidden relative">
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 pointer-events-none">
                 <PixelBlast
                     variant="circle"
-                    pixelSize={isMobile ? 4 : 5}
+                    pixelSize={isMobile ? 8 : 5}
                     color="#B19EEF"
-                    patternScale={isMobile ? 3 : 3.5}
-                    patternDensity={isMobile ? 1.5 : 1.2}
+                    patternScale={isMobile ? 4 : 3.5}
+                    patternDensity={isMobile ? 0.8 : 1.2}
                     pixelSizeJitter={0.5}
-                    enableRipples={true}
+                    enableRipples={!isMobile}
                     rippleSpeed={0.5}
-                    rippleThickness={isMobile ? 0.08 : 0.1}
+                    rippleThickness={0.1}
                     rippleIntensityScale={1.8}
                     liquid={!isMobile}
                     antialias={!isMobile}
                     liquidStrength={0.15}
                     liquidRadius={1.2}
                     liquidWobbleSpeed={5}
-                    speed={isMobile ? 0.3 : 0.6}
+                    speed={isMobile ? 0.2 : 0.6}
                     edgeFade={0.2}
                     transparent={true}
+                    autoPauseOffscreen={true}
+                    maxPixelRatio={isMobile ? 1 : 2}
                 />
             </div>
 
@@ -76,7 +72,7 @@ const Welcome = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="max-w-xl md:max-w-4xl w-full relative z-10 flex flex-col items-center"
+                className="max-w-xl md:max-w-4xl w-full relative z-10 flex flex-col items-center will-change-transform"
             >
 
                 <motion.h1
